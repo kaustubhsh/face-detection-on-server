@@ -1,7 +1,11 @@
 # Face Detection on Server
 
 It is a real time face detection project based on java script implemented project hosted through flask on python3.
- 
+
+It uses [OpenCv](https://opencv.org/) for the Face Detection using the [haarcascades](https://github.com/opencv/opencv/tree/master/data/haarcascades) file.
+It is hosted with Flask on localhost, Flask_ngrok on the local machine and can be implemented on the server using Apache2.
+
+The front hand is developed using HTML and Java Script, that request for the webcam and send the data to the server.
 
 ## Installation
 
@@ -13,7 +17,8 @@ pip install -r requirements.txt
 
 ## Usage
 ```bash 
-
+python3 server.py
+firefox index.html
 ```
 
 ## Contributing
