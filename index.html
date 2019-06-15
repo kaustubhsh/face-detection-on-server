@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"/><head>
+<body>
+<video id="video" width="300" height="300" autoplay></video>
+<hr><button id="snap">Click</button>
+<canvas id="canvas" width="300" height="300" style="border:1px solid #000000;"></canvas>
+<img src ="" id="documentHolder">
+<div id="select"></div>
+<script>
+
+		// Put event listeners into place
+		window.addEventListener("DOMContentLoaded", function() {
+			// Grab elements, create settings, etc.
+           
+		var canvas =  document.createElement('canvas');
+		canvas.setAttribute('width', 300);
+    		canvas.setAttribute('height', 300);
+            var context = canvas.getContext('2d');
+            var video = document.getElementById('video');
+		  
+            var mediaConfig =  { video: true };
+            var errBack = function(e) {
+            	console.log('An error has occurred!', e)
+            };
+
+			// Put video listeners into place
+            if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia(mediaConfig).then(function(stream) {
+					//video.src = window.URL.createObjectURL(stream);
+					video.srcObject = stream;
+                    video.play();
+                });	
+            }
+
+            /* Legacy code below! */
+            else if(navigator.getUserMedia) { // Standard
+				navigator.getUserMedia(mediaConfig, function(stream) {
+					video.src = stream;
+					video.play();
+				}, errBack);
+			} else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+				navigator.webkitGetUserMedia(mediaConfig, function(stream){
+					video.src = window.webkitURL.createObjectURL(stream);
+					video.play();
+				}, errBack);
+			} else if(navigator.mozGetUserMedia) { // Mozilla-prefixed
+				navigator.mozGetUserMedia(mediaConfig, function(stream){
+					video.src = window.URL.createObjectURL(stream);
+					video.play();
+				}, errBack);
+			}
+
+			video.addEventListener('play', function() {
+				var $this = this; //cache
+  				(function loop() {
+    			if (!$this.paused && !$this.ended) {
+      				context.drawImage($this, 0, 0,300,300);
+
+
+
+      var data = canvas.toDataURL('image/png');
+	console.log(data)
+
+     var str = "data:image/jpeg;base64,";
+     var xhr = new XMLHttpRequest();
+     xhr.open("POST","http://127.0.0.1:5000", true);
+     xhr.send(data);
+	
+	var img=document.getElementById("documentHolder")
+	var request = new XMLHttpRequest();
+	request.open('GET','http://127.0.0.1:5000');
+	request.responseType = 'text';
+	request.onload = function() {
+  	
+	var value = str.concat(request.response); 	
+	img.src=value
+	console.log(value)
+	};
+	request.send();
+
+
+
+
+
+
+
+
+      				setTimeout(loop, 1000 / 30); // drawing at 30fps
+
+
+      				
+    			}
+				})();
+  			}, 0);
+		
+		}, false);
+
+</script>
+</body>
+</html>
