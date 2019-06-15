@@ -1,6 +1,6 @@
 # Face Detection on Server
 
-It is a real time face detection project based on java script implemented project hosted through flask on python.
+It is a real time face detection project based on java script implemented project hosted through flask on python3.
  
 
 ## Installation
