@@ -5,7 +5,7 @@ It is a real time face detection project based on java script implemented projec
 It uses [OpenCv](https://opencv.org/) for the Face Detection using the [haarcascades](https://github.com/opencv/opencv/tree/master/data/haarcascades) file.
 It is hosted with Flask on localhost, Flask_ngrok on the local machine and can be implemented on the server using Apache2.
 
-The front hand is developed using HTML and Java Script, that request for the webcam and send the data to the server.
+The front hand is developed using HTML and Java Script, that request for the webcam and send and receive  data from the server.
 
 ## Installation
 
