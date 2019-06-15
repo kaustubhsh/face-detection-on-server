@@ -1,0 +1,1 @@
+The images after face detection are stored in this directory
